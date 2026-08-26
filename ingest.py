@@ -11,7 +11,12 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from pathlib import Path
 
-load_dotenv()
+# Safely load .env, ignore if corrupted
+try:
+    load_dotenv()
+except Exception as e:
+    print(f"⚠️ Warning: Could not load .env file: {e}")
+    print("Continuing without .env file...")
 
 
 def load_pdf(pdf_path: str) -> Tuple[str, List[Dict]]:
