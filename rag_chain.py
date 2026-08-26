@@ -9,7 +9,12 @@ from langchain_openai import ChatOpenAI
 from langchain_community.llms import Ollama
 from langchain_community.vectorstores import Chroma
 
-load_dotenv()
+# Safely load .env, ignore if corrupted
+try:
+    load_dotenv()
+except Exception as e:
+    print(f"⚠️ Warning: Could not load .env file: {e}")
+    print("Continuing without .env file...")
 
 
 def get_citation_aware_prompt() -> PromptTemplate:
